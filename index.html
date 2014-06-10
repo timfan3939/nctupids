@@ -52,7 +52,7 @@
 			<div id="right">
 				<table id="info-table">
 					<tr id="table-title">
-						<td style="width:10px"><p class="info-table-ch">&nbsp;</p> <p class="info-table-en">&nbsp;</p></td>
+						<td id="indicator-title"><p class="info-table-ch">&nbsp;</p> <p class="info-table-en">&nbsp;</p></td>
 						<td><p class="info-table-ch">車次</p> <p class="info-table-en">TRAIN NO.</p></td>
 						<td><p class="info-table-ch">開往</p> <p class="info-table-en">DESTINATION</p></td>
 						<td><p class="info-table-ch">車種</p> <p class="info-table-en">TYPE</p></td>
@@ -63,7 +63,7 @@
 					</tr>
 					<tr id="table-space"></tr>
 					<tr id="table-course-0" class="table-course">
-						<td class=""><div class="trainBoarding"><span class="oddLight">●</span><br/><span class="evenLight">●</span></div></td>
+						<td class=""><div class="indicator"><span class="oddLight">●</span><br/><span class="evenLight">●</span></div></td>
 						<td class="train_no">&nbsp;</td>
 						<td class="destination">&nbsp;</td>
 						<td class="train_type">&nbsp;</td>
@@ -74,7 +74,7 @@
 					</tr>
 					<tr id="table-space"> <td colspan="8">&nbsp;</td> </tr>
 					<tr id="table-course-1" class="table-course">
-						<td class=""><div class="trainBoarding"><span class="oddLight">●</span><br/><span class="evenLight">●</span></div></td>
+						<td class=""></td>
 						<td class="train_no">&nbsp;</td>
 						<td class="destination">&nbsp;</td>
 						<td class="train_type">&nbsp;</td>
@@ -85,7 +85,7 @@
 					</tr>
 					<tr id="table-space"> <td colspan="8">&nbsp;</td> </tr>
 					<tr id="table-course-2" class="table-course">
-						<td class=""><div class="trainBoarding"><span class="oddLight">●</span><br/><span class="evenLight">●</span></div></td>
+						<td class=""></td>
 						<td class="train_no">&nbsp;</td>
 						<td class="destination">&nbsp;</td>
 						<td class="train_type">&nbsp;</td>
@@ -96,7 +96,7 @@
 					</tr>
 					<tr id="table-space"> <td colspan="8">&nbsp;</td> </tr>
 					<tr id="table-course-3" class="table-course">
-						<td class=""><div class="trainBoarding"><span class="oddLight">●</span><br/><span class="evenLight">●</span></div></td>
+						<td class=""></td>
 						<td class="train_no">&nbsp;</td>
 						<td class="destination">&nbsp;</td>
 						<td class="train_type">&nbsp;</td>
@@ -107,7 +107,7 @@
 					</tr>
 					<tr id="table-space"> <td colspan="8">&nbsp;</td> </tr>
 					<tr id="table-course-4" class="table-course">
-						<td class=""><div class="trainBoarding"><span class="oddLight">●</span><br/><span class="evenLight">●</span></div></td>
+						<td class=""></td>
 						<td class="train_no">&nbsp;</td>
 						<td class="destination">&nbsp;</td>
 						<td class="train_type">&nbsp;</td>
@@ -124,14 +124,10 @@
 
 <script type="text/javascript">
 	
-	var lightCount;
-	lightCount = 0;
 	$.getJSON ('data/diagram.json', function(data) {
-
 
 		$('.title-ch').append('國立交通大學鐵道研究會 '+ data.year +' 學年度開車資訊');
 		$('#term').append(data.term);
-
 
 		for (var i=0; i<=4; i++) {
 
@@ -143,21 +139,31 @@
 			$('#table-course-'+ i +'>.via').append(data.data[i].via);
 			$('#table-course-'+ i +'>.remarks').append(data.data[i].remarks);
 
-
-
 		}
 	});
+
+	var lightCount = 0;
+
 	setInterval(function () {
-	if(lightCount%2==0) {
-		$('.oddLight').css("color", "#0A0A0A");
-		$('.evenLight').css("color", "#F50A0A");
-	}
-	else {
-		$('.oddLight').css("color", "#F50A0A");
-		$('.evenLight').css("color", "#0A0A0A");
-	}
-	lightCount++;
-}, 1000);
+
+		if (lightCount%2==0) {
+
+			$('.oddLight').css("color", "#0A0A0A");
+			$('.evenLight').css("color", "#F50A0A");
+
+			lightCount = 0;
+		}
+		else {
+
+			$('.oddLight').css("color", "#F50A0A");
+			$('.evenLight').css("color", "#0A0A0A");
+		}
+
+
+
+		lightCount++;
+
+	}, 1000);
 
 </script>
 
